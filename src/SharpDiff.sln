@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RebuildParser", "RebuildParser\RebuildParser.csproj", "{9EB4BBD1-2173-46B7-BA67-72AC8EBD0086}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpDiff", "SharpDiff\SharpDiff.csproj", "{91E98035-4805-4F55-84AB-AB6E00BBC526}"

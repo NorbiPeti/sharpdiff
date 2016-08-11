@@ -29,8 +29,14 @@ namespace SharpDiff
                 if (lineLocation < 0)
                     lineLocation = 0;
 
+                int contextlines = 0;
                 foreach (var snippet in chunk.Snippets)
                 {
+                    if(!(snippet is ContextSnippet))
+                    {
+                        if (contextlines > 0)
+                            lineLocation += contextlines; //TODO
+                    }
                     if (snippet is AdditionSnippet)
                     {
                         foreach (var line in snippet.ModifiedLines)
@@ -48,7 +54,21 @@ namespace SharpDiff
                     }
                     else if (snippet is ContextSnippet)
                     {
-                        lineLocation += snippet.OriginalLines.Count();
+                        foreach (string line in snippet.OriginalLines.Select(l => l.Value))
+                        {
+                            bool matches = true; //Only add if all lines match in snippet - But there are separate snippets for each line
+                            for (int i = -2; i <= 2; i++)
+                            {
+                                if (!(lineLocation + i > 0 && lineLocation + i < fileLines.Count && line == fileLines[lineLocation + i]))
+                                {
+                                    matches = false;
+                                    break;
+                                }
+                            }
+                            if (matches) //TODO: Test
+                                contextlines += snippet.OriginalLines.Count();
+                        }
+                        //lineLocation += snippet.OriginalLines.Count();
                     }
                 }
             }

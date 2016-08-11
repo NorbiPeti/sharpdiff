@@ -13,20 +13,23 @@ namespace SharpDiff.FileStructure
         public Header(FormatType format, IEnumerable<IFile> files)
         {
             Format = format;
-            Files = new List<IFile>(files);
+            if (files != null)
+                Files = new List<IFile>(files);
         }
 
         public FormatType Format { get; private set; }
         public IList<IFile> Files { get; private set; }
 
-        public bool IsNewFile
+        public virtual bool IsNewFile
         {
             get { return Files[0] is NullFile; }
+            protected set { }
         }
 
-        public bool IsDeletion
+        public virtual bool IsDeletion
         {
             get { return Files[1] is NullFile; }
+            protected set { }
         }
     }
 }
